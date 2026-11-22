@@ -51,6 +51,11 @@ services:
       MQTT_USER: "${MQTT_USER:-petlibro}"
       MQTT_PASS: "${MQTT_PASS:?Set MQTT_PASS in .env (copy .env.example)}"
       MOSQUITTO_PASSWD_FILE: "/mosquitto/auth/passwd"
+      # Alerts without Home Assistant: an ntfy topic or a webhook (optional, from .env).
+      # The Settings page wins; these only fill in a field that is blank there.
+      NOTIFY_PUSH_URL: "${NOTIFY_PUSH_URL:-}"
+      NOTIFY_PUSH_FORMAT: "${NOTIFY_PUSH_FORMAT:-}"
+      NOTIFY_PUSH_TOKEN: "${NOTIFY_PUSH_TOKEN:-}"
       # Home Assistant (optional, only for sending alerts through HA)
       # HA_BASE_URL: "http://homeassistant:8123/api"
       # HA_TOKEN: "<long-lived access token>"
