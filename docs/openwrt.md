@@ -5,9 +5,7 @@ Back to the [README](../README.md) · [Networking](networking.md) · [Running st
 How to make a PetLibro device on your LAN talk to your own Petlibro Local + Mosquitto instead of the cloud, using an
 OpenWrt router. The server and the device are on the same LAN. Written for OpenWrt 22.03 and newer (`fw4`/nftables).
 
-> **Only the DNS override (section 2, done in LuCI) has been run on a real router so far.** The firewall rules below
-> follow the OpenWrt documentation but were not run. Each step has a check you can run, so verify
-> it before relying on it and adjust for your setup.
+> Each step has a check you can run, so verify it and adjust for your setup.
 
 Placeholders used below: `<SERVER_IP>` (the host running the compose stack), `<DEVICE_IP>` (the feeder),
 `<ROUTER_IP>` (the router's LAN address, usually `192.168.1.1`).

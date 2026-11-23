@@ -35,8 +35,8 @@ Thanks to the owners of the repositories above, whose published work made this p
 Built from one owner's capture of the real PetLibro cloud talking to a feeder (firmware 2.0.14, hardware 1.0.0), and run on that same feeder against Petlibro Local with its own broker. Serial prefix `AF04`; the MQTT model, in the topics and in `DEVICE_START_EVENT`, is `PLAF108`. It connects with plain MQTT on port 1883 like the other feeders, so the DNS override works for it. It is added as a Granary device (the app shows the Granary type, with the model name PLAF108 learned from the feeder's own messages).
 
 **What works:**
-- **Feed Now** with a number of portions, and the feeder's progress (`GRAIN_START`, `GRAIN_END`), which feeds Last Fed and the log. A real feed was seen in the capture; from Petlibro Local the command and the progress handling were checked against a simulated feeder (`tools/replay_capture.py`), not yet with a real dispense, so stay near the feeder the first time.
-- **Feeding plans:** the same messages as the Granary. The app replaces the feeder's whole list, a disabled plan is simply not sent, and plan times are UTC on the wire.
+- **Feed Now** with a number of portions, and the feeder's progress (`GRAIN_START`, `GRAIN_END`), which feeds Last Fed and the log. Manual feeds sent from Petlibro Local have run on the real feeder for several days without problems; the command and the progress handling were also checked against a simulated feeder (`tools/replay_capture.py`).
+- **Feeding plans:** the same messages as the Granary. The app replaces the feeder's whole list, a disabled plan is simply not sent, and plan times are UTC on the wire. Scheduled meals have run on the real feeder for several days without problems.
 - **Light:** on and off, with the state shown back, checked on the real feeder from Petlibro Local. The feeder acknowledges and reports `lightSwitch` and `enableLight`.
 - **State:** food present, battery percentage, Wi-Fi signal, firmware and hardware versions, and the clock (the app answers its time requests, like for every model).
 
@@ -46,7 +46,7 @@ Built from one owner's capture of the real PetLibro cloud talking to a feeder (f
 - No power alerts. At boot it reports `powerType` 2 with `batteryState` `USING` and 100 %, which could be battery or mains; I could not tell, so I did not guess.
 - Black and white pictures are bundled for it (`plaf108_b.png`, `plaf108_w.png`); pick the color on the device's edit screen.
 
-**Not built:** the cloud's public API lists more fields for this model (vacuum and pump state, sleep mode, grain outlet blocked, desiccant days remaining, cover close speed), but this firmware and the PetLibro app version the owner used never showed them, so nothing is guessed. The portions limit stays at the Granary's 12; the cloud API suggests the Air takes up to 16, which is unconfirmed.
+**Not built:** the cloud's public API lists more fields for this model (vacuum and pump state, sleep mode, grain outlet blocked, desiccant days remaining, cover close speed), but this firmware and the PetLibro app version the owner used never showed them, so nothing is guessed. The portions limit stays at the Granary's 12 (the cloud API suggests the Air takes up to 16).
 
 **Before you move a feeder from the cloud to your own server:** when it first asks for its feeding plans, the app answers with its own list. If that is empty the feeder deletes the plans it had, so note them down (times in the PetLibro app are local, the feeder stores UTC) and add them in the Schedule tab right after adding the feeder. If something does not work, please [open an issue](https://github.com/smcneece/petlibro-local/issues) with the log from around the time you tried it.
 
